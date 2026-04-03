@@ -1,0 +1,61 @@
+{
+  "name": "@onceonly/onceonly-sdk",
+  "version": "3.0.5",
+  "description": "Execution safety and governance layer for AI agents: idempotency, budgets, tool controls, and audit logs.",
+  "license": "MIT",
+  "author": "OnceOnly <support@onceonly.tech>",
+  "homepage": "https://onceonly.tech/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OnceOnly-Tech/onceonly-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OnceOnly-Tech/onceonly-typescript/issues"
+  },
+  "keywords": [
+    "idempotency",
+    "automation",
+    "ai-agents",
+    "governance",
+    "onceonly"
+  ],
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && node scripts/build-cjs.mjs",
+    "clean": "rm -rf dist dist-cjs",
+    "check": "npm run clean && npm run build",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "release:check": "node scripts/check-release.mjs",
+    "example:basic": "tsx examples/general/basic_check_lock.ts",
+    "example:debug:timeline": "tsx examples/ai/run_debug_timeline.ts",
+    "example:debug:failure": "tsx examples/ai/run_debug_failure.ts"
+  },
+  "dependencies": {
+    "cross-fetch": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.2"
+  }
+}
